@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CertiNode - Blockchain Credentials on ICP</title>
+    <style>
+        :root {
+            --primary: #32afe9;
+            --button: #472bb6;
+            --secondary: #121483;
+            --dark: #17141a;
+            --light: #f5f5f7;
+            --accent: #FF5C00;
+        }
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #b62ff0;
+        }
+        
+        .logo svg {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--button);
+            color: var(--light);
+            border: none;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--light);
+            border: 2px solid var(--button);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(66, 34, 101, 0.323);
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #6e30e9, #ec5f99);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .StartGet {
+            background: linear-gradient(270deg, #6e30e9, #c04c7c, #6e30e9);
+            background-size: 400% 400%;
+            animation: gradientMove 5s ease infinite;
+            display: block;
+            width: 100%;
+            font-size: large;
+        }
+        .LMore {
+            display: block;
+            width: 100%;
+            font-size: large;
+        }
+
+
+        .features {
+            padding: 60px 0;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .steps {
+            padding: 60px 0;
+        }
+        
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .network {
+            padding: 60px 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .network-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .network-item {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .network-item:hover {
+            opacity: 1;
+        }
+        
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .powered{
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            justify-content: center;
+
+        }
+
+        .copyright {
+            opacity: 0.5;
+            font-size: 14px;
+        }
+        
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        .blob1 {
+            background-color: #bb00ff;
+            top: -200px;
+            left: -100px;
+        }
+        
+        .blob2 {
+            background-color: #49c8ff;
+            bottom: -200px;
+            right: -100px;
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: rgba(42, 21, 21, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .demo-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .demo-red {
+            background-color: #ff5f56;
+        }
+        
+        .demo-yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .demo-green {
+            background-color: #27c93f;
+        }
+        
+        .demo-content {
+            padding: 20px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .workflow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 150px;
+        }
+        
+        .workflow-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 24px;
+        }
+        
+        .workflow-arrow {
+            height: 2px;
+            width: 40px;
+            background-color: rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+        
+        .workflow-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="#" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#b62fb0" stroke-width="3"/>
+                    <path d="M12 14.5C13.3807 14.5 14.5 13.3807 14.5 12C14.5 10.6193 13.3807 9.5 12 9.5C10.6193 9.5 9.5 10.6193 9.5 12C9.5 13.3807 10.6193 14.5 12 14.5Z" fill="#b62fb0"/>
+                    <path d="M12 8V2" stroke="#b62fe0" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M16 12H22" stroke="#b62fe0" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                Certi<span>Node</span>
+            </a>
+            <div class="nav-links">
+                <a href="#">Features</a>
+                <a href="#">How It Works</a>
+                <a href="#">For Institutions</a>
+                <a href="#">About</a>
+            </div>
+            <div>
+                <a href="./login" class="btn btn-primary">Log In</a>
+<a href="./login" class="btn btn-secondary">Sign Up</a>
+            </div>
+            
+        </nav>
+    </div>
+    
+    <section class="hero">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="container">
+            <h1>Secure Academic Credentials on the Blockchain</h1>
+            <p>CertiNode leverages Internet Computer Protocol (ICP) to provide tamper-proof, instantly verifiable digital credentials. Upload once, verify anywhere.</p>
+            <div class="hero-actions ">
+                <a href="./upload" class="btn btn-primary StartGet">Get Started</a>
+                <a href="#" class="btn btn-secondary LMore">Learn More</a>
+            </div>
+            
+            <div class="demo-container">
+                <div class="demo-header">
+                    <div class="demo-dot demo-red"></div>
+                    <div class="demo-dot demo-yellow"></div>
+                    <div class="demo-dot demo-green"></div>
+                </div>
+                <div class="demo-content">
+                    <h3>How CertiNode Works</h3>
+                    <div class="workflow">
+                        <div class="workflow-step">
+                            <div class="workflow-icon">📤</div>
+                            <p>Upload Document</p>
+                        </div>
+                        <div class="workflow-arrow"></div>
+                        <div class="workflow-step">
+                            <div class="workflow-icon">✅</div>
+                            <p>Verify Authenticity</p>
+                        </div>
+                        <div class="workflow-arrow"></div>
+                        <div class="workflow-step">
+                            <div class="workflow-icon">🔐</div>
+                            <p>Mint NFT Certificate</p>
+                        </div>
+                        <div class="workflow-arrow"></div>
+                        <div class="workflow-step">
+                            <div class="workflow-icon">🌐</div>
+                            <p>Share <br> Globally</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Solution</h2>
+                <p>CertiNode transforms how academic credentials are issued, stored, and verified using blockchain technology</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Tamper-Proof Verification</h3>
+                    <p>Documents are cryptographically sealed on the ICP blockchain, making them impossible to forge or tamper with.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Verification</h3>
+                    <p>Verify credentials in seconds instead of days or weeks. No more emails or phone calls to institutions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Accessibility</h3>
+                    <p>Access your credentials from anywhere in the world. Share them with employers and institutions with a simple link.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔑</div>
+                    <h3>ICP Wallet Login</h3>
+                    <p>Secure authentication through your Internet Computer Protocol wallet with no password to remember.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🪙</div>
+                    <h3>NFT Credentials</h3>
+                    <p>Each verified document is minted as a unique NFT, giving you full ownership and control of your credentials.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Privacy Controls</h3>
+                    <p>You decide who sees your credentials and for how long. Revoke access at any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="steps">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Four simple steps to secure your academic credentials forever</p>
+            </div>
+            <div class="step-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Connect Your ICP Wallet</h3>
+                        <p>Sign in securely with your Internet Computer Protocol wallet. No passwords, no hassle, complete security.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Upload Your Documents</h3>
+                        <p>Upload your academic certificates, degrees, or transcripts through our secure interface.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Verification Process</h3>
+                        <p>Our system verifies your documents through trusted institutional partnerships and advanced AI verification.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Receive Your NFT Certificate</h3>
+                        <p>Once verified, your document is minted as an NFT on the ICP blockchain. Share it with anyone, anytime, or retrieve it using the NFT ID.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="network">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted Network</h2>
+                <p>Join hundreds of universities, employers and institutions already using CertiNode</p>
+            </div>
+            <div class="network-grid">
+                <div class="network-item">
+                    <svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="80" height="20" rx="4" stroke="#FFFFFF" stroke-width="2"/>
+                        <text x="50" y="25" font-family="Arial" font-size="12" fill="#FFFFFF" text-anchor="middle">University A</text>
+                    </svg>
+                </div>
+                <div class="network-item">
+                    <svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="80" height="20" rx="4" stroke="#FFFFFF" stroke-width="2"/>
+                        <text x="50" y="25" font-family="Arial" font-size="12" fill="#FFFFFF" text-anchor="middle">University B</text>
+                    </svg>
+                </div>
+                <div class="network-item">
+                    <svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="80" height="20" rx="4" stroke="#FFFFFF" stroke-width="2"/>
+                        <text x="50" y="25" font-family="Arial" font-size="12" fill="#FFFFFF" text-anchor="middle">Company X</text>
+                    </svg>
+                </div>
+                <div class="network-item">
+                    <svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="80" height="20" rx="4" stroke="#FFFFFF" stroke-width="2"/>
+                        <text x="50" y="25" font-family="Arial" font-size="12" fill="#FFFFFF" text-anchor="middle">Institution Y</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+            <p class="copyright">© 2025 CertiNode. Powered by Internet Computer Protocol.</p>
+            <img class="powered"  src="/src/hoswap2_frontend/icp.png">
+            </div>
+            
+        
+    </footer>
+</body>
+</html>
